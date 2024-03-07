@@ -1,0 +1,17 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        num_dict = {}
+        
+        for i in range(len(nums)):
+            num = nums[i]     # i=0,num=11  ; i=1, num=15   ; i=2, num=9    ;i=3, num=4     ; i=4, num=5
+            complement = target - num     #complement=-2    ; complement=-6  ; complement=0     ; complement=5      complement = 4
+            if complement in num_dict:     #will not work     ;will not work    ; will not work     ;will not work  ; if 4 in num_dict(which is true)
+                return [num_dict[complement], i]                                                                     # 3,4
+
+            num_dict[num] = i   #dictionary = {11:0}    ;dictionary = {11:0 ; 15:1} ;dictionary = {11:0 ; 15:1 ; 9:2}  ;dictionary = {11:0 ; 15:1 ; 9:2 ; 4:3}
+        return []
+solution_instance = Solution()
+nums = [11, 15, 9, 4, 5]
+target = 9
+result = solution_instance.twoSum(nums, target)
+print(result) 
