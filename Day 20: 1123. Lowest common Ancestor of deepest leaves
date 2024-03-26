@@ -1,0 +1,41 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+def dfs(root):
+    if root.left == None and root.right == None: return root, 1
+
+    left = None
+    right = None
+    
+    if root.left:
+        left, left_depth = dfs(root.left)
+
+    if root.right:
+        right, right_depth = dfs(root.right)
+
+    if left and right and left_depth == right_depth:
+        return root, left_depth+1
+
+    if left and right and left_depth > right_depth:
+        return left, left_depth+1
+
+    if left and right and left_depth < right_depth:
+        return right, right_depth+1
+
+    if left:
+        return left, left_depth+1
+
+    if right:
+        return right, right_depth+1
+
+    return None, -1
+
+
+class Solution: 
+    def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        node, depth = dfs(root)
+        return node
