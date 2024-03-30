@@ -1,0 +1,18 @@
+class Solution:
+    def minKBitFlips(self, nums: List[int], k: int) -> int:
+        count = 0
+        N = len(nums)
+        inv_ends = deque() # track invert-ends
+        for i in range(N):
+            if inv_ends and inv_ends[0] == i:
+                inv_ends.popleft() # remove invert-end that is not active anymore
+            if inv_ends:
+                for _ in inv_ends: # if we need to invert, just invert as many times as we need (=number of currently running invert procedures)
+                    nums[i] ^= 1
+
+            if nums[i] == 0 and i <= N - k: # can invert only when possible - i <= N - k and when [i] == 0
+                count += 1 # count inverts
+                nums[i] = 1 # set it to 1
+                inv_ends.append(i + k) # append new k-invert end
+        
+        return count if all(num == 1 for num in nums) else -1 # all ones -> we good, else -1
