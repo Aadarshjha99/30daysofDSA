@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        vector<int>v;
+        int start=0;
+        int end=0;
+        for(int i=sqrt(area);i>=1;i--){
+            if(area%i==0){
+                start=area/i;
+                end=i;
+                break;
+            }
+        }
+        int maxi=max(start,end);
+        int mini=min(start,end);
+        v.push_back(maxi);
+        v.push_back(mini);
+        return v;
+
+    }
+};
