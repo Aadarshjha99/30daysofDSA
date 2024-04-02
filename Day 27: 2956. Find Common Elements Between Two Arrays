@@ -1,0 +1,23 @@
+class Solution(object):
+    def findIntersectionValues(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        x = []
+        y = []
+        cnt = 0
+        c = 0 
+        j = []
+        for i in nums1:
+            if i in nums2:
+                cnt += 1
+            x.append(cnt)
+        j.append(max(x))
+        for i in nums2:
+            if i in nums1:
+                c += 1
+            y.append(c)
+        j.append(max(y))
+        return j 
